@@ -30,6 +30,7 @@ public abstract class CompositeGlyph extends Glyph {
         children.add(position, glyph);
     }
 
+    @Override
     public void insert(Glyph glyph) {
         glyph.setParent(this);
         children.add(glyph);

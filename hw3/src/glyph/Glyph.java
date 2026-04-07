@@ -18,6 +18,7 @@ public abstract class  Glyph {
     //default behavior
     public boolean intersects(Point point){throw new UnsupportedOperationException("This method has no implementation yet.");}
     public void insert(Glyph glyph, int position){throw new UnsupportedOperationException("This glyph cannot have children.");}
+    public void insert(Glyph glyph){throw new UnsupportedOperationException("This glyph cannot have children.");}
     public void remove(Glyph glyph){throw new UnsupportedOperationException("This glyph cannot have children.");}
     public Glyph child(int position){throw new UnsupportedOperationException("This glyph cannot have children.");}
     public Glyph getParent(){return parent;}
@@ -28,7 +29,7 @@ public abstract class  Glyph {
     //public void adjustBounds()?
     public void setPosition(Bounds bounds){this.bounds.setPoint(bounds.getPoint().getX(),bounds.getPoint().getY());}
     public void setSize(int width, int height){this.bounds.setWidth(width);this.bounds.setHeight(height);}
-    public void setSize(Bounds cursor, Bounds child){throw new UnsupportedOperationException("This glyph cannot have children.");};
+    public void setSize(Bounds cursor, Bounds child){throw new UnsupportedOperationException("This glyph cannot have children.");}
     public void setSize(Window window){}
 
 
@@ -39,11 +40,5 @@ public abstract class  Glyph {
             root=root.getParent();
         }
         root.compose();
-    }
-
-    public CompositeGlyph asComposite(Window window){
-        Column c = new Column(window);
-        c.insert(this,0);
-        return c;
     }
 }

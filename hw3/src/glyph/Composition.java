@@ -2,7 +2,7 @@ package glyph;
 
 import compositior.Compositor;
 import compositior.SimpleCompositor;
-import util.Bounds;
+import util.Point;
 import window.Window;
 
 /**
@@ -15,6 +15,11 @@ public abstract class Composition extends CompositeGlyph{
     public Composition(Window w){
         super();
         this.compositor= new SimpleCompositor(w);
+    }
+
+    // In Composition.java (or Glyph.java)
+    public Point getCursorStart() {
+        return this.getBounds().getPoint();
     }
 
     @Override

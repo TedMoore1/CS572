@@ -25,8 +25,8 @@ public class SimpleCompositor implements Compositor {
     @Override
     public void compose() {
         // create cursor based on parent
-        Bounds cursor = new Bounds(new Point(c.getBounds().getPoint().getX(), c.getBounds().getPoint().getY()),
-                                    c.getBounds().getWidth(), c.getBounds().getHeight());
+        Bounds cursor = new Bounds(new Point(c.getCursorStart().getX(), c.getCursorStart().getY()),
+                c.getBounds().getWidth(), c.getBounds().getHeight());
         int i = 0;
         for (Glyph child = c.child(i); child!=null; i++, child = c.child(i)) {
             // ask (leaf) child to set size, based on window

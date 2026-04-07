@@ -24,29 +24,9 @@ public class ScrollBar extends Embellishment {
     }
 
     @Override
-    public void setPosition(Bounds bounds) {
-        super.setPosition(bounds);
-        // Child start at same position
-        this.getChild().getBounds().setPoint(
-                bounds.getPoint().getX(),
-                bounds.getPoint().getY()
-        );
+    public void setSize(Bounds cursor, Bounds child) {
+        this.setSize(child.getWidth()+scrollBarWidth, child.getHeight());
+        cursor.setPoint(cursor.getPoint().getX(),cursor.getPoint().getY()+child.getHeight());
     }
 
-    @Override
-    public void compose() {
-        // Reset child
-        this.getChild().setSize(0, 0);
-        // Child bounds match
-        this.getChild().getBounds().setPoint(
-                this.getBounds().getPoint().getX(),
-                this.getBounds().getPoint().getY()
-        );
-        super.compose();
-        // ScrollBar's bounds are child width plus scrollbar width
-        this.setSize(
-                this.getChild().getBounds().getWidth() + scrollBarWidth,
-                this.getChild().getBounds().getHeight()
-        );
-    }
 }

@@ -1,5 +1,6 @@
 package glyph;
 
+import util.Point;
 import window.Window;
 import util.Bounds;
 
@@ -12,6 +13,7 @@ public class Border extends Embellishment {
     public Border(Glyph child, Window w, int borderWidth) {
         super(child, w);
         this.borderWidth = borderWidth;
+        composeRoot();
     }
 
     @Override
@@ -23,29 +25,18 @@ public class Border extends Embellishment {
                          borderWidth);
     }
 
+
     @Override
-    public void setPosition(Bounds bounds) {
-        super.setPosition(bounds);
-        //Offsets child's point by the amount of border width
-        this.getChild().getBounds().setPoint(
-                bounds.getPoint().getX() + borderWidth,
-                bounds.getPoint().getY() + borderWidth
-        );
+    public void setSize(Bounds cursor, Bounds child) {
+        this.setSize(child.getWidth()+borderWidth*2, child.getHeight()+borderWidth*2);
+        cursor.setPoint(cursor.getPoint().getX(),cursor.getPoint().getY()+child.getHeight());
     }
 
     @Override
-    public void compose() {
-        // Reset child size
-        this.getChild().setSize(0, 0);
-        this.getChild().getBounds().setPoint(
+    public Point getCursorStart() {
+        return new Point(
                 this.getBounds().getPoint().getX() + borderWidth,
                 this.getBounds().getPoint().getY() + borderWidth
-        );
-        super.compose();
-        // adds room for border
-        this.setSize(
-                this.getChild().getBounds().getWidth()  + 2 * borderWidth,
-                this.getChild().getBounds().getHeight() + 2 * borderWidth
         );
     }
 }

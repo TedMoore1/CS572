@@ -1,5 +1,6 @@
 import glyph.*;
 import glyph.Character;
+import widget.WidgetFactory;
 import window.SwingWindow;
 
 public class Lexi {
@@ -7,7 +8,7 @@ public class Lexi {
         SwingWindow w = new SwingWindow("Lexi");
 
         //Columns and Rows
-        Glyph c1 = new Column(new String[]{"This is a","border demonstration."},w);
+        Glyph c1 = new Column(new String[]{"X","","Z"},w);
         Glyph c2 = new Column(w);
         Glyph r1 = new Row(w);
         Glyph r2 = new Row(w);
@@ -20,17 +21,23 @@ public class Lexi {
         Glyph rectangle1 = new Rectangle(10,20);
         Glyph rectangle2 = new Rectangle(20,10);
 
-        //Border + Scroll Bar
-        Embellishment scroll = new ScrollBar(c1,w,10);
 
-        Embellishment border = new Border(scroll,w,5);
-        border.insert(new Row("Scroller too!",w));
+        //Creating label and button
+        WidgetFactory widgetFactory = WidgetFactory.instance();
+        Button button = widgetFactory.createButton(w);
+        Label label = widgetFactory.createLabel(w);
+
+
+        label.insert(new Row("pq",w));
+        button.insert(new Row("PQ",w));
+
+        c1.insert(label,1);
 
 
         //Building up Rows and Columns
         r1.insert(a,0);
         r1.insert(rectangle1,1);
-        r1.insert(border,2);
+        r1.insert(c1,2);
         r1.insert(b,3);
         r2.insert(x1,0);
         r2.insert(rectangle2,1);
@@ -39,6 +46,14 @@ public class Lexi {
         c2.insert(r1,0);
         c2.insert(r2,1);
 
-        w.setContents(c2);
+        //add button
+        c2.insert(button,2);
+
+        //Border + Scroll Bar
+        Embellishment scroll = new ScrollBar(c2,w,10);
+        Embellishment border = new Border(scroll,w,5);
+        //border.insert(new Row("Scroller too!",w));
+
+        w.setContents(border);
     }
 }
