@@ -51,8 +51,4 @@ public abstract class CompositeGlyph extends Glyph {
         }
     }
 
-    @Override
-    public CompositeGlyph asComposite(Window window) {
-        return this;
-    }
 }
