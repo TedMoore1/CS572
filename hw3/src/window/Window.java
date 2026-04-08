@@ -2,20 +2,54 @@ package window;
 
 import glyph.*;
 
-public interface Window {
+public abstract class Window {
+    private WindowImp imp;
+    private Glyph glyph;
 
-    void drawCharacter(char c, int x, int y);
-    void drawRectangle(int x, int y, int width, int height);
+    public void draw(){
+        glyph.draw(this);
+    }
 
-    int charWidth(char c);
-    int charHeight(char c);
+    public Window(String title){
+        imp =  WindowFactory.instance().createWindow(title,this);
+    }
 
-    void setContents(Glyph glyph);
+    public void drawCharacter(char c, int x, int y){
+        imp.drawCharacter(c,x,y);
+    }
 
-    void addBorder(int x1, int y1, int x2, int y2, int width);
-    void addScrollBar(int x, int y, int width, int height);
+    public void drawRectangle(int x, int y, int width, int height){
+        imp.drawRectangle(x,y,width,height);
+    }
 
-    void drawButton(int x, int y, int width, int height, String color);
-    void drawLabel(int x, int y, int width, int height, String color);
+    public int charWidth(char c) {
+        return imp.charWidth(c);
+    }
+
+    public int charHeight(char c){
+        return imp.charHeight(c);
+    }
+
+    public void setContents(Glyph g){
+        this.glyph=g;
+        imp.setContents();
+    }
+
+    public void addBorder(int x1, int y1, int x2, int y2, int width){
+        imp.addBorder(x1,y1,x2,y2,width);
+    }
+
+    public void addScrollBar(int x, int y, int width, int height){
+        imp.addScrollBar(x,y,width,height);
+    }
+
+
+    public void drawButton(int x, int y, int width, int height, String color){
+        imp.drawButton(x,y,width,height,color);
+    }
+
+    public void drawLabel(int x, int y, int width, int height, String color){
+        imp.drawLabel(x,y,width,height,color);
+    }
 
 }

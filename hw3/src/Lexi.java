@@ -1,11 +1,12 @@
 import glyph.*;
 import glyph.Character;
 import widget.WidgetFactory;
-import window.SwingWindow;
+import window.ApplicationWindow;
 
 public class Lexi {
     public static void main(String[] args){
-        SwingWindow w = new SwingWindow("Lexi");
+        //SwingWindow w = new SwingWindow("Lexi");
+        ApplicationWindow w = new ApplicationWindow("Lexi");
 
         //Columns and Rows
         Glyph c1 = new Column(new String[]{"X","","Z"},w);
