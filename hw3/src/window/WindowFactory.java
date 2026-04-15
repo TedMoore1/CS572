@@ -9,12 +9,9 @@ public abstract class WindowFactory {
     public static WindowFactory instance() {
         if (uniqueInstance == null) {
             String s = System.getenv("LexiWindow");
-            System.out.println("LexiWindow env var = " + s); // debug
             if (s != null && s.equalsIgnoreCase("Awt")) {
-                System.out.println("Using AWT");
                 uniqueInstance = AwtWindowFactory.instance();
             } else {
-                System.out.println("Using Swing");
                 uniqueInstance = SwingWindowFactory.instance();
             }
         }
