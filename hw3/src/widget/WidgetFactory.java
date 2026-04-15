@@ -18,9 +18,9 @@ public abstract class WidgetFactory {
         if (uniqueInstance == null){
             String s = System.getenv("LexiWidget");
             if (s != null && s.equals("Green")) {
-                uniqueInstance = new GreenWidgetFactory();
+                uniqueInstance = GreenWidgetFactory.instance();
             } else {
-                uniqueInstance = new RedWidgetFactory();
+                uniqueInstance = RedWidgetFactory.instance();
             }
         }
         return uniqueInstance;

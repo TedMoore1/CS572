@@ -10,9 +10,17 @@ import window.Window;
  *  of the FactoryMethod Design Pattern.
  *  Also used in Singleton pattern with its package private constructor.
  */
-public class RedWidgetFactory extends WidgetFactory {
+class RedWidgetFactory extends WidgetFactory {
+    private static RedWidgetFactory uniqueInstance;
 
-    RedWidgetFactory() {}
+    private RedWidgetFactory() {}
+
+    public static RedWidgetFactory instance(){
+        if(uniqueInstance == null){
+            uniqueInstance = new RedWidgetFactory();
+        }
+        return uniqueInstance;
+    }
 
     @Override
     protected Button buttonFactoryMethod(Window w) {

@@ -1,6 +1,7 @@
 package widget;
 
 import glyph.Button;
+import util.Bounds;
 import window.Window;
 
 /**
@@ -13,7 +14,11 @@ class RedButton extends Button {
     }
 
     @Override
-    protected String color() {
-        return "Red";
+    public void draw(Window window) {
+        Bounds b = this.getBounds();
+        window.drawButton(b.getPoint().getX(), b.getPoint().getY(),
+                          b.getWidth(), b.getHeight(), "Red");
+        // To draw text on top of rectangle
+        super.draw(window);
     }
 }
