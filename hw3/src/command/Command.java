@@ -6,5 +6,5 @@ public interface Command {
     void execute();
     void unexecute();
     boolean isReversible(); // Distinguishes undo/redo commands without casting
-    Command clone();
+    Command copy();
 }

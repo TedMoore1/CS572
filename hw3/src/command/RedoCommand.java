@@ -13,5 +13,5 @@ public class RedoCommand implements Command {
     public boolean isReversible() { return false; } // Never logged to history
 
     @Override
-    public Command clone() { return new RedoCommand(); }
+    public Command copy() { return new RedoCommand(); }
 }

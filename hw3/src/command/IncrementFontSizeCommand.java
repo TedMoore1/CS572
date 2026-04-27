@@ -16,5 +16,5 @@ public class IncrementFontSizeCommand extends FontCommand {
     }
 
     @Override
-    public Command clone() { return new IncrementFontSizeCommand(window); }
+    public Command copy() { return new IncrementFontSizeCommand(window); }
 }

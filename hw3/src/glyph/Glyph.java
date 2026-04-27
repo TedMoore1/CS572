@@ -16,7 +16,19 @@ public abstract class  Glyph {
     //abstract methods
     abstract public void draw(Window window);
     //default behavior
-    public boolean intersects(Point point){throw new UnsupportedOperationException("This method has no implementation yet.");}
+    // ChainOfResponsibility(223): Handler — default passes responsibility upward (returns false)
+    public boolean handleClick(int x, int y) { return false; }
+
+    // Default intersection test using bounds
+    public boolean intersects(Point point) {
+        Bounds b = getBounds();
+        if (b == null) return false;
+        return point.getX() >= b.getPoint().getX()
+                && point.getX() <  b.getPoint().getX() + b.getWidth()
+                && point.getY() >= b.getPoint().getY()
+                && point.getY() <  b.getPoint().getY() + b.getHeight();
+    }
+
     public void insert(Glyph glyph, int position){throw new UnsupportedOperationException("This glyph cannot have children.");}
     public void insert(Glyph glyph){throw new UnsupportedOperationException("This glyph cannot have children.");}
     public void remove(Glyph glyph){throw new UnsupportedOperationException("This glyph cannot have children.");}

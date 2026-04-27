@@ -17,6 +17,19 @@ public abstract class CompositeGlyph extends Glyph {
         children = new ArrayList<>();
     }
 
+    // ChainOfResponsibility(223): propagate click down the containment hierarchy
+    @Override
+    public boolean handleClick(int x, int y) {
+        int i = 0;
+        Glyph child = child(i);
+        while (child != null) {
+            if (child.intersects(new Point(x, y)) && child.handleClick(x, y))
+                return true;          // chain stops when a handler claims the click
+            child = child(++i);
+        }
+        return false;
+    }
+
     @Override
     public void draw(Window window) {
         for (Glyph glyph : children) {

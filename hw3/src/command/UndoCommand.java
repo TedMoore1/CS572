@@ -13,5 +13,5 @@ public class UndoCommand implements Command {
     public boolean isReversible() { return false; } // Never logged to history
 
     @Override
-    public Command clone() { return new UndoCommand(); }
+    public Command copy() { return new UndoCommand(); }
 }

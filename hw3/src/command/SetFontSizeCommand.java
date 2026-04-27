@@ -7,7 +7,7 @@ import window.Window;
 public class SetFontSizeCommand extends FontCommand {
     private final int targetSize;
 
-    public SetFontSizeCommand(Window window, int targetSize) {
+    public SetFontSizeCommand(int targetSize, Window window) {
         super(window);
         this.targetSize = targetSize;
     }
@@ -20,5 +20,5 @@ public class SetFontSizeCommand extends FontCommand {
     }
 
     @Override
-    public Command clone() { return new SetFontSizeCommand(window, targetSize); }
+    public Command copy() { return new SetFontSizeCommand(targetSize,window); }
 }

@@ -1,3 +1,6 @@
+import command.DecrementFontSizeCommand;
+import command.IncrementFontSizeCommand;
+import command.SetFontSizeCommand;
 import glyph.*;
 import glyph.Character;
 import widget.WidgetFactory;
@@ -49,6 +52,29 @@ public class Lexi {
 
         //add button
         c2.insert(button,2);
+
+
+        //New clickable buttons
+        Button inc = widgetFactory.createButton(w);
+        inc.insert(new Character('+'));
+        inc.setCommand(new IncrementFontSizeCommand(w));
+        Button dec = widgetFactory.createButton(w);
+        dec.insert(new Character('-'));
+        dec.setCommand(new DecrementFontSizeCommand(w));
+        Button set14 = widgetFactory.createButton(w);
+        set14.insert(new Row("14",w));
+        set14.setCommand(new SetFontSizeCommand(14,w));
+        Button set20 = widgetFactory.createButton(w);
+        set20.insert(new Row("20",w));
+        set20.setCommand(new SetFontSizeCommand(20,w));
+
+        Glyph r3 = new Row(w);
+        r3.insert(inc);
+        r3.insert(dec);
+        r3.insert(set14);
+        r3.insert(set20);
+        c2.insert(r3);
+
 
         //Border + Scroll Bar
         Embellishment scroll = new ScrollBar(c2,w,10);

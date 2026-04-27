@@ -15,6 +15,22 @@ public abstract class Window {
 
     public Window(String title){imp =  WindowFactory.instance().createWindow(title,this);}
 
+    //NEW FOR COMMANDS
+    public void key(char c) { /* default no-op; override in subclass */ }
+    // Called by AwtWindow/SwingWindow PaneMouseListener — ChainOfResponsibility(223): entry point
+    public void click(int x, int y) {
+        if (getGlyph() != null) {
+            getGlyph().handleClick(x, y);
+            repaint();
+        }
+    }
+    public int  getFontSize()      { return getImp().getFontSize(); }
+    public void setFontSize(int s) { getImp().setFontSize(s); }
+    public void repaint()          {
+        glyph.composeRoot();
+        getImp().repaint();
+    }
+
     // Forward to WindowImp
     public void drawCharacter(char c, int x, int y){imp.drawCharacter(c,x,y);}
     // If other subclasses are not supposed to be able to have rectangles.

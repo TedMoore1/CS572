@@ -1,44 +1,46 @@
 package command;
 
-import java.util.Stack;
+// Command(233): supports undo/redo via stack + index
+// Singleton(127): one history for the whole application
+import java.util.ArrayList;
+import java.util.List;
 
-// Command(233): history list holder
-// Singleton(127): Singleton
 public class CommandHistory {
     private static CommandHistory uniqueInstance;
-    private final Stack<Command> past   = new Stack<>();
-    private final Stack<Command> future = new Stack<>();
+
+    private final List<Command> history = new ArrayList<>();
+    private int current = -1; // index into history stack
 
     private CommandHistory() {}
 
     public static CommandHistory instance() {
-        if (uniqueInstance == null)
-            uniqueInstance = new CommandHistory();
+        if (uniqueInstance == null) uniqueInstance = new CommandHistory();
         return uniqueInstance;
     }
 
-    /** Execute a command and log it if reversible. */
     public void execute(Command command) {
         command.execute();
         if (command.isReversible()) {
-            past.push(command);
-            future.clear();
+            // Trim any redoable future when a new command branches history
+            while (history.size() > current + 1) {
+                history.removeLast();
+            }
+            history.add(command);
+            current++;
         }
     }
 
     public void undo() {
-        if (!past.isEmpty()) {
-            Command c = past.pop();
-            c.unexecute();
-            future.push(c);
+        if (current >= 0) {
+            history.get(current).unexecute();
+            current--;
         }
     }
 
     public void redo() {
-        if (!future.isEmpty()) {
-            Command c = future.pop();
-            c.execute();
-            past.push(c);
+        if (current < history.size() - 1) {
+            current++;
+            history.get(current).execute();
         }
     }
 }

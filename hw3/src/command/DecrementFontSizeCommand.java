@@ -16,5 +16,5 @@ public class DecrementFontSizeCommand extends FontCommand {
     }
 
     @Override
-    public Command clone() { return new DecrementFontSizeCommand(window); }
+    public Command copy() { return new DecrementFontSizeCommand(window); }
 }
