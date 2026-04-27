@@ -1,6 +1,4 @@
-import command.DecrementFontSizeCommand;
-import command.IncrementFontSizeCommand;
-import command.SetFontSizeCommand;
+import command.*;
 import glyph.*;
 import glyph.Character;
 import widget.WidgetFactory;
@@ -9,7 +7,13 @@ import window.ApplicationWindow;
 public class Lexi {
     public static void main(String[] args){
         //SwingWindow w = new SwingWindow("Lexi");
+        KeyMap km = new KeyMap();
         ApplicationWindow w = new ApplicationWindow("Lexi");
+        km.put('i', new IncrementFontSizeCommand(w));
+        km.put('d', new DecrementFontSizeCommand(w));
+        km.put('u', new UndoCommand());
+        km.put('r', new RedoCommand());
+        w.setKeyMap(km);
 
         //Columns and Rows
         Glyph c1 = new Column(new String[]{"X","","Z"},w);

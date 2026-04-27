@@ -1,5 +1,8 @@
 package window;
 
+import command.Command;
+import command.CommandHistory;
+import command.KeyMap;
 import glyph.Glyph;
 
 /**
@@ -15,6 +18,14 @@ public class ApplicationWindow extends Window{
     public void setContents(Glyph glyph){
         setGlyph(glyph);
         getImp().setContents();
+    }
+
+    @Override
+    public void key(char c) {
+        Command cmd = getKeyMap().get(c);
+        if (cmd != null) {
+            CommandHistory.instance().execute(cmd.copy()); // Prototype
+        }
     }
 
     // Application Window Specific

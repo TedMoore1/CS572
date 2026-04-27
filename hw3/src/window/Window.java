@@ -1,5 +1,6 @@
 package window;
 
+import command.KeyMap;
 import glyph.*;
 
 /**
@@ -8,12 +9,17 @@ import glyph.*;
 public abstract class Window {
     private WindowImp imp;
     private Glyph glyph;
+    private KeyMap km;
 
     protected WindowImp getImp(){return imp;}
     protected Glyph getGlyph(){return glyph;}
     protected void setGlyph(Glyph glyph){this.glyph = glyph;}
+    protected KeyMap getKeyMap(){return km;}
+    public void setKeyMap(KeyMap km){this.km = km;}
 
-    public Window(String title){imp =  WindowFactory.instance().createWindow(title,this);}
+    public Window(String title){
+        imp =  WindowFactory.instance().createWindow(title,this);
+    }
 
     //NEW FOR COMMANDS
     public void key(char c) { /* default no-op; override in subclass */ }
@@ -41,6 +47,7 @@ public abstract class Window {
     public void addScrollBar(int x, int y, int width, int height){imp.addScrollBar(x,y,width,height);}
     public void drawButton(int x, int y, int width, int height, String color){imp.drawButton(x,y,width,height,color);}
     public void drawLabel(int x, int y, int width, int height, String color){imp.drawLabel(x,y,width,height,color);}
+
 
     // Implement in subclass
     abstract public void draw();
