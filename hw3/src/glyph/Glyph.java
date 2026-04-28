@@ -5,7 +5,8 @@ import util.Point;
 import window.Window;
 
 /**
- *  Glyph is the Component class of the Composite Design Pattern
+ *  Glyph is the Component class of the Composite Design Pattern.
+ *  ChainOfResponsibility(223): Handler
  */
 public abstract class  Glyph {
     private Glyph parent;
@@ -16,7 +17,6 @@ public abstract class  Glyph {
     //abstract methods
     abstract public void draw(Window window);
     //default behavior
-    // ChainOfResponsibility(223): Handler — default passes responsibility upward (returns false)
     public boolean handleClick(int x, int y) { return false; }
 
     // Default intersection test using bounds

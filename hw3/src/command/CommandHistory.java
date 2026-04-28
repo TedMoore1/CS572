@@ -1,7 +1,7 @@
 package command;
 
-// Command(233): supports undo/redo via stack + index
-// Singleton(127): one history for the whole application
+// Command(233): supports undo and redo
+// Singleton(127): one history
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class CommandHistory {
         if (command.isReversible()) {
             // Trim any redoable future when a new command branches history
             while (history.size() > current + 1) {
-                history.removeLast();
+                history.remove(history.size()-1);
             }
             history.add(command);
             current++;

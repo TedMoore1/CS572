@@ -14,11 +14,11 @@ public class SetFontSizeCommand extends FontCommand {
 
     @Override
     public void execute() {
-        prevSize = window.getFontSize();
-        window.setFontSize(targetSize);
-        window.repaint();
+        setPrevSize(getWindow().getFontSize());
+        getWindow().setFontSize(targetSize);
+        getWindow().repaint();
     }
 
     @Override
-    public Command copy() { return new SetFontSizeCommand(targetSize,window); }
+    public Command copy() { return new SetFontSizeCommand(targetSize,getWindow()); }
 }

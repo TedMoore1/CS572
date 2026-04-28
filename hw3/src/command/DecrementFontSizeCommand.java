@@ -10,11 +10,11 @@ public class DecrementFontSizeCommand extends FontCommand {
 
     @Override
     public void execute() {
-        prevSize = window.getFontSize();
-        window.setFontSize(prevSize - 1);
-        window.repaint();
+        setPrevSize(getWindow().getFontSize());
+        getWindow().setFontSize(getPrevSize() - 1);
+        getWindow().repaint();
     }
 
     @Override
-    public Command copy() { return new DecrementFontSizeCommand(window); }
+    public Command copy() { return new DecrementFontSizeCommand(getWindow()); }
 }
